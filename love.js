@@ -1,3 +1,4 @@
+const isMobile = window.innerWidth <= 768;
 
 let mouseX = 0;
 let mouseY = 0;
@@ -128,19 +129,30 @@ setInterval(createGoofyEmoji, 700);
 
 
 
-envelope.addEventListener("mouseenter", () => {
-  if (evadingActive) {
-    document.body.style.cursor = "pointer";
-    evadeEnvelope();
- 
+// DESKTOP: chase effect on mouse enter
+if (!isMobile) {
+  envelope.addEventListener("mouseenter", () => {
+    if (evadingActive) {
+      evadeEnvelope();
+    }
+  });
 }
-});
 
-
-/* NORMAL FUNCTION AFTER 3 EVADES */
+// CLICK behavior (mobile and desktop)
 envelope.addEventListener("click", () => {
+
+  // MOBILE: open immediately
+  if (isMobile) {
+    envelope.classList.add("open");
+    letter.classList.add("show");
+    pageContent.classList.add("blur");
+    return;
+  }
+
+  // DESKTOP: wait until chase finished
   if (evadingActive) return;
-chaseMsg.classList.remove("show");
+
+  chaseMsg.classList.remove("show");
   envelope.classList.add("open");
 
   setTimeout(() => {
@@ -149,8 +161,3 @@ chaseMsg.classList.remove("show");
   }, 400);
 });
 
-/* Close letter */
-closeBtn.addEventListener("click", () => {
-  letter.classList.remove("show");
-  pageContent.classList.remove("blur");
-});
