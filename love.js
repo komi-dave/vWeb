@@ -169,4 +169,24 @@ envelope.addEventListener("click", () => {
     letter.classList.add("show");
     pageContent.classList.add("blur");
   }, 400);
+
+
+// CLOSE BUTTON FUNCTIONALITY
+closeBtn.addEventListener("click", (e) => {
+  e.stopPropagation(); // prevents envelope click from firing
+  letter.classList.remove("show");
+  envelope.classList.remove("open");
+  pageContent.classList.remove("blur");
+
+  // Reset letter position for mobile
+  if (isMobile) {
+    letter.style.transform = "translate(-50%, 40%) scale(0.85)";
+  }
+});
+
+
+
+
+
+
 });
