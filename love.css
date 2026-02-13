@@ -1,3 +1,13 @@
+/* Mobile-friendly tap */
+body {
+  -webkit-tap-highlight-color: transparent; /* remove blue flash */
+  touch-action: manipulation; /* prevent weird pinch/zoom */
+}
+
+* {
+  user-select: none; /* prevent text selection on drag */
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -706,4 +716,5 @@ body.love-mode::before {
     transform: translate(var(--mobileX, 0), var(--mobileY, 0)) rotate(var(--mobileRotate, 0deg));
   }
 }
+
 
