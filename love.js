@@ -228,24 +228,6 @@ function closeLetter() {
   }
 }
 
-// --- CLICK ENVELOPE ---
-envelope.addEventListener("click", (e) => {
-  // stop click from bubbling if letter is already open
-  if (letter.classList.contains("show")) return;
-
-  if (isMobile) {
-    openLetter();
-  } else {
-    if (!evadingActive) openLetter();
-  }
-});
-
-// --- CLICK CLOSE BUTTON ---
-closeBtn.addEventListener("click", (e) => {
-  e.stopPropagation(); // prevent envelope click from firing
-  closeLetter();
-});
-</script>
 
 
 
