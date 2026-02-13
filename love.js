@@ -1,10 +1,5 @@
+// Detect if the user is on mobile
 const isMobile = window.innerWidth <= 768;
-if (isMobile) {
-  // Remove evading transform entirely on mobile
-  envelope.style.transition = "none";
-  envelope.style.transform = "none";
-  envelope.style.position = "relative"; // prevent fixed transform weirdness
-}
 
 let mouseX = 0;
 let mouseY = 0;
@@ -19,18 +14,6 @@ const wrapper = document.querySelector(".envelope-wrapper");
 const envelope = document.getElementById("envelope");
 const letter = document.getElementById("letter");
 const closeBtn = document.getElementById("closeBtn");
-closeBtn.addEventListener("click", (e) => {
-  e.stopPropagation();                 // prevent click bubbling
-  letter.classList.remove("show");     // hide the letter
-  pageContent.classList.remove("blur"); // remove page blur
-
-  // Reset mobile transform so letter returns to original position
-  if (isMobile) {
-    letter.style.transform = "translate(-50%, 40%) scale(0.85)";
-  }
-});
-
-
 const pageContent = document.querySelector(".page-content");
 const chaseMsg = document.getElementById("chaseMsg");
 
@@ -143,27 +126,17 @@ setInterval(createGoofyEmoji, 700);
 
 
 
-<script>
-  const envelope = document.getElementById("envelope");
-  const letter = document.getElementById("letter");
-  const closeBtn = document.getElementById("closeBtn");
-  const pageContent = document.querySelector(".page-content");
-  const isMobile = window.innerWidth <= 768;
-
-  closeBtn.addEventListener("click", (e) => {
-    e.stopPropagation();               // prevent envelope click from triggering
-    letter.classList.remove("show");   // hide letter
-    envelope.classList.remove("open"); // close the flap
-    pageContent.classList.remove("blur"); // remove background blur
-
-    // Reset mobile position
-    if (isMobile) {
-      letter.style.transform = "translate(-50%, 40%) scale(0.85)";
-    }
-  });
-</script>
 
 
+
+
+envelope.addEventListener("mouseenter", () => {
+  if (evadingActive) {
+    document.body.style.cursor = "pointer";
+    evadeEnvelope();
+ 
+}
+});
 
 
 // DESKTOP: chase effect on mouse enter
@@ -197,37 +170,3 @@ envelope.addEventListener("click", () => {
     pageContent.classList.add("blur");
   }, 400);
 });
-
-
-
-<script>
-const envelope = document.getElementById("envelope");
-const letter = document.getElementById("letter");
-const closeBtn = document.getElementById("closeBtn");
-const pageContent = document.querySelector(".page-content");
-const isMobile = window.innerWidth <= 768;
-
-let evadingActive = true;
-
-// --- OPEN LETTER ---
-function openLetter() {
-  envelope.classList.add("open");      // flap opens
-  letter.classList.add("show");        // letter appears
-  pageContent.classList.add("blur");   // blur background
-  evadingActive = false;               // stop evading if desktop
-}
-
-// --- CLOSE LETTER ---
-function closeLetter() {
-  letter.classList.remove("show");     // hide letter
-  envelope.classList.remove("open");   // close flap
-  pageContent.classList.remove("blur"); // remove blur
-
-  if (isMobile) {
-    letter.style.transform = "translate(-50%, 40%) scale(0.85)";
-  }
-}
-
-
-
-
