@@ -200,5 +200,52 @@ envelope.addEventListener("click", () => {
 
 
 
+<script>
+const envelope = document.getElementById("envelope");
+const letter = document.getElementById("letter");
+const closeBtn = document.getElementById("closeBtn");
+const pageContent = document.querySelector(".page-content");
+const isMobile = window.innerWidth <= 768;
+
+let evadingActive = true;
+
+// --- OPEN LETTER ---
+function openLetter() {
+  envelope.classList.add("open");      // flap opens
+  letter.classList.add("show");        // letter appears
+  pageContent.classList.add("blur");   // blur background
+  evadingActive = false;               // stop evading if desktop
+}
+
+// --- CLOSE LETTER ---
+function closeLetter() {
+  letter.classList.remove("show");     // hide letter
+  envelope.classList.remove("open");   // close flap
+  pageContent.classList.remove("blur"); // remove blur
+
+  if (isMobile) {
+    letter.style.transform = "translate(-50%, 40%) scale(0.85)";
+  }
+}
+
+// --- CLICK ENVELOPE ---
+envelope.addEventListener("click", (e) => {
+  // stop click from bubbling if letter is already open
+  if (letter.classList.contains("show")) return;
+
+  if (isMobile) {
+    openLetter();
+  } else {
+    if (!evadingActive) openLetter();
+  }
+});
+
+// --- CLICK CLOSE BUTTON ---
+closeBtn.addEventListener("click", (e) => {
+  e.stopPropagation(); // prevent envelope click from firing
+  closeLetter();
+});
+</script>
+
 
 
