@@ -143,6 +143,25 @@ setInterval(createGoofyEmoji, 700);
 
 
 
+<script>
+  const envelope = document.getElementById("envelope");
+  const letter = document.getElementById("letter");
+  const closeBtn = document.getElementById("closeBtn");
+  const pageContent = document.querySelector(".page-content");
+  const isMobile = window.innerWidth <= 768;
+
+  closeBtn.addEventListener("click", (e) => {
+    e.stopPropagation();               // prevent envelope click from triggering
+    letter.classList.remove("show");   // hide letter
+    envelope.classList.remove("open"); // close the flap
+    pageContent.classList.remove("blur"); // remove background blur
+
+    // Reset mobile position
+    if (isMobile) {
+      letter.style.transform = "translate(-50%, 40%) scale(0.85)";
+    }
+  });
+</script>
 
 
 
@@ -178,6 +197,7 @@ envelope.addEventListener("click", () => {
     pageContent.classList.add("blur");
   }, 400);
 });
+
 
 
 
