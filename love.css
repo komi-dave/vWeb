@@ -366,7 +366,8 @@ body.love-mode::before {
 
   opacity: 0;
   transition: all 1.2s cubic-bezier(.16,1,.3,1);
-  z-index: 1000;
+  z-index: 10000;
+pointer-events: auto;  
 }
 
 
@@ -716,5 +717,6 @@ body.love-mode::before {
     transform: translate(var(--mobileX, 0), var(--mobileY, 0)) rotate(var(--mobileRotate, 0deg));
   }
 }
+
 
 
