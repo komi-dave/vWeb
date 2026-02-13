@@ -19,6 +19,18 @@ const wrapper = document.querySelector(".envelope-wrapper");
 const envelope = document.getElementById("envelope");
 const letter = document.getElementById("letter");
 const closeBtn = document.getElementById("closeBtn");
+// CLOSE BUTTON
+closeBtn.addEventListener("click", (e) => {
+  e.stopPropagation();                 // prevent the click from bubbling
+  letter.classList.remove("show");     // hide the letter
+  pageContent.classList.remove("blur"); // remove blur effect
+
+  // Reset letter position on mobile
+  if (isMobile) {
+    letter.style.transform = "translate(-50%, 40%) scale(0.85)";
+  }
+});
+
 const pageContent = document.querySelector(".page-content");
 const chaseMsg = document.getElementById("chaseMsg");
 
@@ -166,5 +178,6 @@ envelope.addEventListener("click", () => {
     pageContent.classList.add("blur");
   }, 400);
 });
+
 
 
