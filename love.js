@@ -1,4 +1,10 @@
 const isMobile = window.innerWidth <= 768;
+if (isMobile) {
+  // Remove evading transform entirely on mobile
+  envelope.style.transition = "none";
+  envelope.style.transform = "none";
+  envelope.style.position = "relative"; // prevent fixed transform weirdness
+}
 
 let mouseX = 0;
 let mouseY = 0;
@@ -160,4 +166,5 @@ envelope.addEventListener("click", () => {
     pageContent.classList.add("blur");
   }, 400);
 });
+
 
